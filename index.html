@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marc Agueh · Portfolio</title>
+<meta name="description" content="Marc Agueh, administrateur systèmes et réseaux, spécialiste cloud et cybersécurité (Bac+5, RNCP 7). Parcours, formations, certifications, compétences et postes visés.">
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface-2: #eef2f7;
+    --text: #18202b;
+    --muted: #5a6575;
+    --line: #dde3ea;
+    --accent: #1f5fbf;
+    --accent-soft: #e3ecfa;
+    --ok: #1d7a4f;
+    --ok-soft: #e1f3ea;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 16px rgba(16, 24, 40, .04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f141b;
+      --surface: #161d27;
+      --surface-2: #1d2633;
+      --text: #e7ecf2;
+      --muted: #9aa6b5;
+      --line: #2a3442;
+      --accent: #7aa7ee;
+      --accent-soft: #1c2b44;
+      --ok: #6cc99b;
+      --ok-soft: #173327;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f141b;
+    --surface: #161d27;
+    --surface-2: #1d2633;
+    --text: #e7ecf2;
+    --muted: #9aa6b5;
+    --line: #2a3442;
+    --accent: #7aa7ee;
+    --accent-soft: #1c2b44;
+    --ok: #6cc99b;
+    --ok-soft: #173327;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  h1, h2, h3 { line-height: 1.25; margin: 0; }
+  p { margin: 0 0 .8em; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+
+  /* Navigation */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 16px; height: 56px; }
+  nav .brand { font-weight: 700; text-decoration: none; color: var(--text); white-space: nowrap; }
+  nav ul { list-style: none; margin: 0 0 0 auto; padding: 0; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav ul a {
+    display: block; padding: 6px 10px; border-radius: 8px;
+    color: var(--muted); text-decoration: none; font-size: 14px; white-space: nowrap;
+  }
+  nav ul a:hover { background: var(--surface-2); color: var(--text); }
+
+  /* En-tête */
+  header { padding: 56px 0 32px; }
+  .hero { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+  .avatar {
+    width: 112px; height: 112px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--accent), #0e3a7a);
+    color: #fff; font-size: 40px; font-weight: 700; letter-spacing: 1px;
+  }
+  .hero h1 { font-size: clamp(30px, 5vw, 42px); }
+  .hero .role { font-size: clamp(17px, 2.4vw, 20px); color: var(--muted); margin: 6px 0 14px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 999px;
+    background: var(--surface-2); color: var(--text); font-size: 14px;
+  }
+  .badge.ok { background: var(--ok-soft); color: var(--ok); font-weight: 600; }
+  .badge.ok::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .btn {
+    display: inline-block; padding: 10px 18px; border-radius: 10px;
+    font-weight: 600; text-decoration: none; font-size: 15px;
+    border: 1px solid var(--line); color: var(--text); background: var(--surface);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .btn.primary { color: #0f141b; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0f141b; } }
+
+  /* Chiffres clés */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 8px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .stat b { display: block; font-size: 26px; color: var(--accent); line-height: 1.1; }
+  .stat span { font-size: 14px; color: var(--muted); }
+
+  /* Sections */
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  .section-head { margin-bottom: 20px; }
+  .section-head h2 { font-size: 26px; }
+  .section-head p { color: var(--muted); margin: 6px 0 0; max-width: 680px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .lead { font-size: 18px; }
+  .hint {
+    border-left: 3px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 10px 10px 0; font-size: 15px; margin-top: 16px;
+  }
+
+  /* Frise chronologique */
+  .timeline { position: relative; margin: 0; padding: 0 0 0 26px; list-style: none; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+  .timeline li { position: relative; margin-bottom: 16px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -26px; top: 22px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--surface); border: 3px solid var(--accent);
+  }
+  .timeline li.edu::before { border-color: var(--ok); }
+  .when { font-size: 14px; font-weight: 600; color: var(--accent); }
+  .edu .when { color: var(--ok); }
+  .timeline h3 { font-size: 18px; margin: 2px 0; }
+  .where { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
+  .legend { display: flex; gap: 18px; font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; border: 3px solid var(--accent); vertical-align: -1px; }
+  .legend span.e::before { border-color: var(--ok); }
+
+  /* Compétences */
+  .skill-card h3 { font-size: 17px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { padding: 4px 10px; border-radius: 8px; background: var(--surface-2); font-size: 14px; }
+
+  /* Certifications */
+  .certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .certs li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .certs b { font-weight: 600; font-size: 15px; }
+  .certs small { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .certs .org { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 1px; }
+
+  /* Publications */
+  .pub h3 { font-size: 16px; margin-bottom: 6px; }
+  .pub p { color: var(--muted); font-size: 15px; margin: 0; }
+  .pub .meta { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+
+  /* Postes */
+  .job { display: flex; flex-direction: column; }
+  .job .level { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+  .job .level.now { color: var(--ok); }
+  .job .level.next { color: var(--accent); }
+  .job h3 { font-size: 17px; margin-bottom: 8px; }
+  .job p { font-size: 15px; color: var(--muted); }
+  .job ul { margin: 0; padding-left: 18px; font-size: 14px; }
+
+  /* Glossaire */
+  dl.gloss { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; margin: 0; }
+  dl.gloss dt { font-weight: 700; }
+  dl.gloss dd { margin: 0; color: var(--muted); }
+
+  footer { padding: 40px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  .theme-toggle { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 4px 10px; cursor: pointer; font: inherit; font-size: 14px; }
+
+  @media (max-width: 760px) {
+    nav ul { display: none; }
+    .theme-toggle { margin-left: auto; }
+    header { padding-top: 32px; }
+    .hero { grid-template-columns: 1fr; gap: 16px; }
+    .avatar { width: 80px; height: 80px; font-size: 28px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3, .certs { grid-template-columns: 1fr; }
+    dl.gloss { grid-template-columns: 1fr; gap: 2px; }
+    dl.gloss dd { margin-bottom: 10px; }
+  }
+
+  @media print {
+    nav, .cta, .theme-toggle { display: none !important; }
+    body { background: #fff; color: #000; font-size: 12px; }
+    section { padding: 18px 0; break-inside: avoid-page; }
+    .card, .stat, .certs li { box-shadow: none; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Sommaire">
+  <div class="wrap">
+    <a class="brand" href="#top">Marc Agueh</a>
+    <ul>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#personnalite">Personnalité</a></li>
+      <li><a href="#postes">Postes visés</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Changer de thème">◐ Thème</button>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="hero">
+      <div class="avatar" aria-hidden="true">MA</div>
+      <div>
+        <h1>Marc Agueh</h1>
+        <p class="role">Administrateur systèmes et réseaux · Consultant et chef de projet Cloud &amp; Cybersécurité</p>
+        <div class="badges">
+          <span class="badge ok">Ouvert aux opportunités</span>
+          <span class="badge">📍 Paris, Île-de-France</span>
+          <span class="badge">🏢 Sur site · Hybride · Télétravail</span>
+          <span class="badge">🎓 Bac+5, RNCP niveau 7</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="https://www.linkedin.com/in/marc-agueh-b14683195" target="_blank" rel="noopener">Me contacter sur LinkedIn</a>
+          <a class="btn" href="#postes">Voir les postes visés</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><b>5 ans et +</b><span>d'expérience en informatique, depuis 2020</span></div>
+    <div class="stat"><b>Bac+5</b><span>Master 2 Cloud &amp; Cybersécurité (RNCP 7)</span></div>
+    <div class="stat"><b>11</b><span>certifications et formations validées</span></div>
+    <div class="stat"><b>5</b><span>publications sur l'IA et la cybersécurité</span></div>
+  </div>
+</div>
+
+<main>
+
+<section id="profil">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mon profil en quelques mots</h2>
+    </div>
+    <div class="card">
+      <p class="lead">Je fais en sorte que les systèmes informatiques d'une entreprise <strong>fonctionnent, restent disponibles et soient protégés</strong> : serveurs, réseau, comptes utilisateurs, cloud.</p>
+      <p>Administrateur systèmes et réseaux de formation, je me suis spécialisé en <strong>cloud computing et en cybersécurité</strong> jusqu'au Master 2 (RNCP niveau 7). Mon parcours m'a mené de l'administration d'infrastructures (Windows Server, Linux, Active Directory) à la sécurité informatique sur des environnements Cisco, puis à une fonction de direction au sein d'INFOTECH GROUP.</p>
+      <p>Ce qui me distingue : j'aime <strong>comprendre et faire comprendre</strong>. Je rédige et je partage des analyses sur la place de l'intelligence artificielle dans la cybersécurité, pour rendre ces sujets accessibles au plus grand nombre.</p>
+      <div class="hint"><strong>Pour un recruteur, en résumé :</strong> un profil technique et polyvalent (systèmes, réseaux, cloud, sécurité), diplômé Bac+5, qui sait aussi piloter des projets et expliquer clairement des sujets complexes.</div>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mon parcours</h2>
+      <p>Expériences professionnelles et diplômes, du plus récent au plus ancien.</p>
+    </div>
+    <div class="legend"><span>Expérience professionnelle</span><span class="e">Diplôme</span></div>
+    <ol class="timeline">
+      <li>
+        <div class="card">
+          <div class="when">2025 – aujourd'hui</div>
+          <h3>Cadre dirigeant</h3>
+          <div class="where">INFOTECH GROUP · Paris</div>
+          <p>Fonction de direction : pilotage de projets et des orientations techniques, avec un regard d'expert sur le cloud et la cybersécurité.</p>
+        </div>
+      </li>
+      <li class="edu">
+        <div class="card">
+          <div class="when">Diplôme obtenu</div>
+          <h3>Master 2 Expert en informatique et systèmes d'information, spécialité Cloud et Cybersécurité</h3>
+          <div class="where">IPSSI (Institut Privé Supérieur des Systèmes d'Information) · Titre RNCP niveau 7 (Bac+5)</div>
+          <p>Mémoire de fin d'études consacré à l'apport de l'intelligence artificielle à la cybersécurité.</p>
+        </div>
+      </li>
+      <li>
+        <div class="card">
+          <div class="when">Nov. 2023 – avr. 2025 · 1 an et 6 mois</div>
+          <h3>Spécialiste en sécurité informatique</h3>
+          <div class="where">ORSYS · Paris</div>
+          <p>Sécurité des systèmes d'information sur des environnements et produits <strong>Cisco Systems</strong> : protection du réseau, prévention des incidents, bonnes pratiques de cybersécurité.</p>
+        </div>
+      </li>
+      <li>
+        <div class="card">
+          <div class="when">2020 – 2023 · 3 ans</div>
+          <h3>Administrateur réseau et systèmes</h3>
+          <div class="where">IPSSI · Paris</div>
+          <p>Administration du réseau et des serveurs, gestion des comptes et des droits (Active Directory), installation des logiciels, support aux utilisateurs, sécurité de l'information.</p>
+        </div>
+      </li>
+      <li class="edu">
+        <div class="card">
+          <div class="when">Diplôme obtenu</div>
+          <h3>Master 1 Administrateur systèmes et réseaux, Infrastructures sécurisées</h3>
+          <div class="where">IPSSI · Titre RNCP niveau 6 (Bac+3/4)</div>
+          <p>Conception, déploiement et sécurisation d'infrastructures : réseaux et télécommunications, serveurs, services d'annuaire.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mes compétences</h2>
+      <p>Regroupées par domaine, pour voir d'un coup d'œil ce que je sais faire.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card skill-card">
+        <h3>🖥️ Systèmes</h3>
+        <div class="chips">
+          <span class="chip">Windows Server</span><span class="chip">Linux</span><span class="chip">Active Directory</span><span class="chip">Installation et déploiement de logiciels</span><span class="chip">Matériel informatique</span>
+        </div>
+      </div>
+      <div class="card skill-card">
+        <h3>🌐 Réseaux</h3>
+        <div class="chips">
+          <span class="chip">TCP/IP</span><span class="chip">Cisco (bases CCNA)</span><span class="chip">Administration réseau</span><span class="chip">Infrastructures sécurisées</span>
+        </div>
+      </div>
+      <div class="card skill-card">
+        <h3>🔐 Cybersécurité</h3>
+        <div class="chips">
+          <span class="chip">Sécurité de l'information</span><span class="chip">Analyse des risques</span><span class="chip">Sécurisation de l'Active Directory</span><span class="chip">IA appliquée à la sécurité</span><span class="chip">Attaques adverses</span>
+        </div>
+      </div>
+      <div class="card skill-card">
+        <h3>☁️ Cloud</h3>
+        <div class="chips">
+          <span class="chip">Microsoft Azure (administration)</span><span class="chip">Sécurité du cloud</span><span class="chip">Pilotage de projets cloud</span>
+        </div>
+      </div>
+      <div class="card skill-card">
+        <h3>📊 Données</h3>
+        <div class="chips">
+          <span class="chip">Traitement des données</span><span class="chip">Analyse de données</span>
+        </div>
+      </div>
+      <div class="card skill-card">
+        <h3>🤝 Savoir-être</h3>
+        <div class="chips">
+          <span class="chip">Travail d'équipe</span><span class="chip">Assistance aux utilisateurs</span><span class="chip">Qualité de service</span><span class="chip">Intelligence émotionnelle</span><span class="chip">Pédagogie</span><span class="chip">Anglais</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Certifications et formations complémentaires</h2>
+      <p>Je me forme en continu, sur la technique comme sur les compétences humaines.</p>
+    </div>
+    <ul class="certs">
+      <li><b>Découvrir le cloud computing : la sécurité <span class="tag">Cloud</span></b><small>mai 2023</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Devenir administrateur Microsoft Azure <span class="tag">Cloud</span></b><small>oct. 2022</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Centraliser et sécuriser l'annuaire Active Directory <span class="tag">Sécurité</span></b><small></small><span class="org">OpenClassrooms</span></li>
+      <li><b>Les réseaux TCP/IP <span class="tag">Réseau</span></b><small></small><span class="org">OpenClassrooms</span></li>
+      <li><b>Préparer la certification CCNA : l'essentiel de la théorie (200-301) <span class="tag">Réseau</span></b><small>nov. 2020</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>L'analyse des risques en cybersécurité <span class="tag">Sécurité</span></b><small>févr. 2025</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Découvrir l'analyse de données <span class="tag">Données</span></b><small>févr. 2022</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Les standards qualité du service client</b><small>juin 2021</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Les fondements de l'automation en marketing</b><small>janv. 2021</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Développer son intelligence émotionnelle</b><small>déc. 2020</small><span class="org">LinkedIn Learning</span></li>
+      <li><b>Définir et atteindre ses objectifs professionnels</b><small>nov. 2020</small><span class="org">LinkedIn Learning</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mes publications</h2>
+      <p>Des documents que j'ai rédigés et partagés sur LinkedIn pour expliquer les liens entre intelligence artificielle et cybersécurité.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card pub"><div class="meta">Mémoire · 9 pages</div><h3>Synthèse de mon mémoire de Master 2</h3><p>Ma recherche de fin d'études sur la cybersécurité et l'intelligence artificielle.</p></div>
+      <div class="card pub"><div class="meta">Analyse · 8 pages</div><h3>L'IA : un allié précieux pour la cybersécurité</h3><p>Comment l'IA aide les entreprises à mieux protéger leurs données sensibles.</p></div>
+      <div class="card pub"><div class="meta">Analyse · 7 pages</div><h3>Comment l'IA représente un danger pour la cybersécurité</h3><p>Les nouvelles menaces nées des attaques automatisées par l'IA.</p></div>
+      <div class="card pub"><div class="meta">Guide · 8 pages</div><h3>L'attaque adverse : comprendre, prévenir, se défendre</h3><p>Les attaques qui trompent les modèles d'IA, et comment s'en protéger.</p></div>
+      <div class="card pub"><div class="meta">Vulgarisation · 10 pages</div><h3>La symphonie des processeurs</h3><p>Les processeurs multicœurs et leur rôle dans l'automatisation des tâches informatiques.</p></div>
+    </div>
+    <p style="margin-top:14px"><a href="https://www.linkedin.com/in/marc-agueh-b14683195/recent-activity/documents/" target="_blank" rel="noopener">Lire ces documents sur LinkedIn →</a></p>
+  </div>
+</section>
+
+<section id="personnalite">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Ma personnalité et mes centres d'intérêt</h2>
+      <p>Au-delà de la technique, ce qui me motive et la façon dont je travaille.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="font-size:18px;margin-bottom:10px">Comment je travaille</h3>
+        <ul style="margin:0;padding-left:18px">
+          <li><strong>Curieux</strong> : je me forme en continu et je suis de près les évolutions de l'IA et de la sécurité.</li>
+          <li><strong>Pédagogue</strong> : j'aime vulgariser et transmettre ce que j'apprends.</li>
+          <li><strong>Orienté service</strong> : l'informatique doit rendre la vie plus simple aux utilisateurs.</li>
+          <li><strong>À l'écoute</strong> : je travaille l'intelligence émotionnelle et l'esprit d'équipe.</li>
+          <li><strong>Méthodique</strong> : je fixe des objectifs clairs et je m'organise pour les atteindre.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="font-size:18px;margin-bottom:10px">Ce qui m'intéresse</h3>
+        <ul style="margin:0;padding-left:18px">
+          <li><strong>L'intelligence artificielle</strong> et ses effets sur la sécurité numérique.</li>
+          <li><strong>La société numérique</strong> : éthique, souveraineté et protection des données.</li>
+          <li><strong>La transition énergétique et le climat</strong>.</li>
+          <li><strong>L'entrepreneuriat et l'innovation</strong>.</li>
+          <li><strong>L'Europe et l'actualité internationale</strong>.</li>
+          <li><strong>L'histoire et le devoir de mémoire</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ambitions">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mes ambitions</h2>
+    </div>
+    <div class="card">
+      <p class="lead">Mettre mon expertise au service d'une entreprise qui veut <strong>sécuriser et moderniser son système d'information</strong>, notamment dans sa transition vers le cloud.</p>
+      <p>À court terme, je souhaite rejoindre une équipe comme <strong>spécialiste en sécurité informatique</strong> ou <strong>administrateur systèmes et réseaux</strong>. À moyen terme, je vise des fonctions de <strong>consultant et de chef de projet cloud et cybersécurité</strong>, où je pourrai allier technique, pilotage et conseil, en intégrant l'intelligence artificielle aux pratiques de sécurité.</p>
+    </div>
+  </div>
+</section>
+
+<section id="postes">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Les postes que je peux occuper</h2>
+      <p>Pour vous aider à situer mon profil dans votre organisation : ce que je peux prendre en charge, et pourquoi.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card job">
+        <div class="level now">Opérationnel immédiatement</div>
+        <h3>Administrateur systèmes et réseaux</h3>
+        <p>Maintenir le parc de serveurs, le réseau et les comptes utilisateurs.</p>
+        <ul><li>3 ans à ce poste (2020 – 2023)</li><li>Windows Server, Linux, Active Directory</li><li>Master 1 Infrastructures sécurisées</li></ul>
+      </div>
+      <div class="card job">
+        <div class="level now">Opérationnel immédiatement</div>
+        <h3>Spécialiste / ingénieur en sécurité informatique</h3>
+        <p>Protéger le réseau et les données, prévenir et traiter les incidents.</p>
+        <ul><li>1 an et demi chez ORSYS, environnement Cisco</li><li>Analyse des risques</li><li>Master 2 Cybersécurité</li></ul>
+      </div>
+      <div class="card job">
+        <div class="level now">Opérationnel immédiatement</div>
+        <h3>Administrateur cloud (Azure)</h3>
+        <p>Gérer et sécuriser les ressources de l'entreprise dans le cloud.</p>
+        <ul><li>Formation administrateur Microsoft Azure</li><li>Sécurité du cloud</li><li>Spécialité Cloud du Master 2</li></ul>
+      </div>
+      <div class="card job">
+        <div class="level next">Fort potentiel</div>
+        <h3>Consultant en cybersécurité</h3>
+        <p>Conseiller les clients sur leurs risques et les mesures de protection adaptées.</p>
+        <ul><li>Analyse des risques en cybersécurité</li><li>Publications et pédagogie</li><li>Vision des enjeux liés à l'IA</li></ul>
+      </div>
+      <div class="card job">
+        <div class="level next">Fort potentiel</div>
+        <h3>Chef de projet infrastructure, cloud ou sécurité</h3>
+        <p>Piloter une migration vers le cloud ou un projet de sécurisation, de bout en bout.</p>
+        <ul><li>Expérience de direction chez INFOTECH GROUP</li><li>Double compétence technique et pilotage</li><li>Titre Expert en SI (RNCP 7)</li></ul>
+      </div>
+      <div class="card job">
+        <div class="level next">Fort potentiel</div>
+        <h3>Analyste SOC (centre de sécurité)</h3>
+        <p>Surveiller les alertes de sécurité, analyser et répondre aux attaques.</p>
+        <ul><li>Bases réseau et sécurité solides</li><li>Intérêt pour la détection par l'IA</li><li>Rigueur et méthode</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="glossaire">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Petit glossaire</h2>
+      <p>Les termes techniques de cette page, expliqués simplement.</p>
+    </div>
+    <div class="card">
+      <dl class="gloss">
+        <dt>RNCP niveau 6 / 7</dt><dd>Diplômes reconnus par l'État (Répertoire national des certifications professionnelles). Le niveau 6 équivaut à Bac+3/4, le niveau 7 à Bac+5.</dd>
+        <dt>Administrateur systèmes et réseaux</dt><dd>La personne qui installe, fait fonctionner et sécurise les serveurs, le réseau et les postes de l'entreprise.</dd>
+        <dt>Active Directory</dt><dd>L'outil de Microsoft qui gère les comptes, les mots de passe et les droits d'accès des salariés.</dd>
+        <dt>Cloud computing</dt><dd>Utiliser des serveurs et des services hébergés sur Internet (Microsoft Azure, par exemple) plutôt que des machines installées dans l'entreprise.</dd>
+        <dt>Cisco / CCNA</dt><dd>Cisco est un leader mondial des équipements réseau. Le CCNA est sa certification de référence sur les bases des réseaux.</dd>
+        <dt>Analyse des risques</dt><dd>Identifier ce qui pourrait menacer le système d'information, évaluer la gravité et choisir les protections prioritaires.</dd>
+        <dt>SOC</dt><dd>Security Operations Center : l'équipe qui surveille en continu la sécurité de l'entreprise et réagit aux attaques.</dd>
+        <dt>Attaque adverse</dt><dd>Une technique qui trompe une intelligence artificielle avec des données piégées.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Marc Agueh</strong> · Paris · <a href="https://www.linkedin.com/in/marc-agueh-b14683195" target="_blank" rel="noopener">linkedin.com/in/marc-agueh-b14683195</a></p>
+    <p>Merci pour votre lecture. Je serai ravi d'échanger avec vous sur votre projet.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+    document.getElementById('themeToggle').addEventListener('click', function () {
+      var current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
